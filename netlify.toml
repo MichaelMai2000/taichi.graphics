@@ -1,0 +1,23 @@
+[build]
+  base = "website/"
+  publish = "build"
+  command = "yarn build"
+  environment = { NODE_VERSION = "14" }
+
+[context.production]
+  command = "yarn run crowdin:sync && yarn build"
+
+[context.deploy-preview]
+  command = "yarn build --locale en"
+
+[[redirects]]
+  from = "/get-started/"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/docs/*"
+  to = "/:splat"
+  status = 302
+  force = true
